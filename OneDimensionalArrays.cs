@@ -129,22 +129,20 @@ namespace ArrayOperation
             return (fibonacci, mathSum , mathProduct);
         }
 
-        internal static int[] MergeTwoArrays(int[] firstArray, int[] secondArray)
+        internal static int[] GetMergeArrays(int[] firstArray, int[] secondArray)
         {
-            var length = 0;
+            var answer = new List<int>();
             if (firstArray != null)
             {
-                length +=firstArray.Length;
+                answer.AddRange(firstArray);
             }
             if (secondArray != null)
             {
-                length += secondArray.Length;
+                answer.AddRange(secondArray);
             }
+            
 
-            var answer = new int[length];
-            firstArray.CopyTo(answer, 0);
-            secondArray.CopyTo(answer, firstArray.Length);
-            return answer;
+            return answer.ToArray();
         }
     }
 }

@@ -2,14 +2,9 @@
 using System;
 using ArrayOperation;
 
-var first  = new int[] { };
-first = null;
-var second = new[] { 0, 0, 0 };
+var first  = new int[,] { { 1, 2, 3 }, { 4, 5, 6 }};
 
+var second = new int[,] { { 1, 2, 3 }, { 0, 0, 0 },{ 1,2,3} };
 
- foreach (var element in OneDimensionalArrays.MergeTwoArrays(first, second))
-{
-    Console.WriteLine(element);
-
-}
-
+var answer = TwoDimensionalArraysAndMatrix.TryGetSummOfMatrix(first, second, out int[,] sumMatrix);
+Console.WriteLine(1);
