@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System;
+using ArrayOperation;
 
-var intArray = new int[] { 1, 2, 3, 4, 5, -12,7,0 };
-Array.Sort(intArray);
-foreach (var element in intArray)
+var first  = new int[] { };
+first = null;
+var second = new[] { 0, 0, 0 };
+
+
+ foreach (var element in OneDimensionalArrays.MergeTwoArrays(first, second))
 {
     Console.WriteLine(element);
+
 }
+
