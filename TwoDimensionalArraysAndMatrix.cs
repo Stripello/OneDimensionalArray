@@ -1,8 +1,8 @@
 ﻿using System.Numerics;
 using System.Linq;
 
-namespace ArrayOperation
-    
+namespace ArraysOperations
+
 {
     internal static class TwoDimensionalArraysAndMatrix
     {

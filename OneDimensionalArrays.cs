@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 
-namespace ArrayOperation
-    
+namespace ArraysOperations
+
 {
     internal static class OneDimensionalArrays
     {
