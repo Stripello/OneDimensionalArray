@@ -1,4 +1,5 @@
 ﻿using System.Numerics;
+using System.Linq;
 
 namespace ArrayOperation
     
@@ -43,21 +44,58 @@ namespace ArrayOperation
             var secondRows = secondMatrix.GetLength (0);
             var secondColumns = secondMatrix.GetLength (1);
 
-            if (  )
+            if ( firstColumns  != secondRows )
             {
                 productionMatrix = null;
                 return false;
             }
 
-            productionMatrix = new int[dimensions.rows, dimensions.columns];
-            for (int i = 0; i < dimensions.rows; i++)
+            productionMatrix = new int[firstRows, secondColumns];
+            for (int i = 0; i < firstRows; i++)
             {
-                for (int j = 0; j < dimensions.columns; j++)
+                for (int j = 0; j < secondColumns; j++)
                 {
-                    productionMatrix[i, j] = firstMatrix[i, j] + secondMatrix[i, j];
+                    for (int k = 0; k < firstColumns; k++)
+                    {
+                        productionMatrix[i, j] += firstMatrix[i, k] * secondMatrix[k, j];
+                    }
                 }
             }
             return true;
+        }
+
+        internal static bool TryGetPositiveAndNegativeNumbers(int[,] incomingArray, out int positive, out int negative)
+        {
+            positive = 0;
+            negative = 0;
+            if (incomingArray == null)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < incomingArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < incomingArray.GetLength(1); j++)
+                {
+                    if (incomingArray[i, j] < 0)
+                    {
+                        negative++;
+                    }
+                    if (incomingArray[i, j] > 0)
+                    {
+                        positive++;
+                    }
+                }
+            }
+            return true;
+        }
+
+        internal static void SortByOddity(ref int[,] incomingArray)
+        {
+            bool odd = true;
+            for (int i = 0; i < incomingArray.GetLength(0); i++)
+            {
+            }
         }
 
     }
