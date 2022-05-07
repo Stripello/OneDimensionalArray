@@ -12,16 +12,26 @@ namespace ArraysOperations
     [RankColumn]
     public class SortingExperiments
     {
-        private const int n = 100000;
+        private const int n = 10;
         private const int min = 0;
         private const int max = 100;
-        private readonly int[] incomingArray;
-
+        private  int[] incomingArray;
+        /*
+        public SortingExperiments()
+        {
+            var random = new Random();
+            incomingArray = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                incomingArray[i] = random.Next(min,max);
+            }
+        }
+        */
         public SortingExperiments()
         {
             Random random = new Random();
             incomingArray = new int[n];
-            for (int i = 0; i < n; i++)
+            for (int i =0; i< n; i++)
             {
                 incomingArray[i] = random.Next(min,max);
             }
@@ -36,7 +46,6 @@ namespace ArraysOperations
             return answer;
         }
 
-        [Benchmark]
         public int[] Bubble()
         {
             var answer = new int[incomingArray.Length];
@@ -109,5 +118,63 @@ namespace ArraysOperations
             return answer;
             
         }
+        
+        public int[] HalfingStack()
+        {
+            var length = incomingArray.Length;
+            var firstLength = incomingArray.Length / 2;
+            var secondLength = length - firstLength;
+            var firstSubarray = incomingArray[0..firstLength];
+            var secondSubarray = incomingArray[firstLength..];
+            Array.Sort(firstSubarray);
+            Array.Sort(secondSubarray);
+
+            var firstStack = new Stack<int>(firstSubarray);
+            var secondStack = new Stack<int>(secondSubarray);
+
+            var answer = new int[length];
+            var tempOne = firstStack.Pop();
+            var tempTwo = secondStack.Pop();
+            for (int i = length-1; i > 0; i--)
+            {
+                if (tempOne >= tempTwo)
+                {
+                    answer[i] = tempOne;
+                    firstLength--;
+                    if (firstLength == 0)
+                    {
+                        i--;
+                        answer[i] = tempTwo;
+                        i--;
+                        for (i = i; i >= 0; i--)
+                        {
+                            answer[i] = secondStack.Pop();
+                        }
+                        break;
+                    }
+                    tempOne = firstStack.Pop();
+                }
+                else
+                {
+                    answer[i] = tempTwo;
+                    secondLength--;
+                    if (secondLength == 0)
+                    {
+                        i--;
+                        answer[i] = tempOne;
+                        i--;
+                        for (i = i; i >= 0; i--)
+                        {
+                            answer[i] = firstStack.Pop();
+                        }
+                        break;
+                    }
+                    tempTwo = secondStack.Pop();
+                }
+            }
+
+            return answer;
+        }
+        
     }
 }
