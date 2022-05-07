@@ -12,11 +12,11 @@ namespace ArraysOperations
     [RankColumn]
     public class SortingExperiments
     {
-        private const int n = 10;
+        private const int n = 10000000;
         private const int min = 0;
         private const int max = 100;
         private  int[] incomingArray;
-        /*
+        
         public SortingExperiments()
         {
             var random = new Random();
@@ -26,7 +26,8 @@ namespace ArraysOperations
                 incomingArray[i] = random.Next(min,max);
             }
         }
-        */
+        
+        /*
         public SortingExperiments()
         {
             Random random = new Random();
@@ -36,7 +37,7 @@ namespace ArraysOperations
                 incomingArray[i] = random.Next(min,max);
             }
         }
-
+        */
         [Benchmark]
         public int[] BuildIn()
         {
@@ -118,7 +119,7 @@ namespace ArraysOperations
             return answer;
             
         }
-        
+        [Benchmark]
         public int[] HalfingStack()
         {
             var length = incomingArray.Length;
