@@ -5,6 +5,8 @@ namespace ArraysOperations
 {
     internal static class OneDimensionalArrays
     {
+        delegate bool Compare(int first ,int second);
+
         internal static (int[] even, int[] odd) GetOddAndEvenSubarrays(int[] incomingArray)
         {
             var evenList = new List<int>();
@@ -55,7 +57,7 @@ namespace ArraysOperations
             {
                 for (int i = 1; i < length; i++)
                 {
-                    if (incomingArray[i - 1] > incomingArray[i])
+                    if (incomingArray[i - 1] >= incomingArray[i])
                     {
                         return false;
                     }
@@ -65,7 +67,7 @@ namespace ArraysOperations
             {
                 for (int i = 1; i < length; i++)
                 {
-                    if (incomingArray[i - 1] < incomingArray[i])
+                    if (incomingArray[i - 1] <= incomingArray[i])
                     {
                         return false;
                     }
@@ -81,6 +83,30 @@ namespace ArraysOperations
                     }
                 }
             }
+            return true;
+        }
+
+        internal static bool IsArrayArranged2(int[] incomingArray)
+        {
+            bool MoreOreEqual(int a, int b) => a >= b;
+            bool LessOrEqual(int a, int b) => a <= b;
+
+          
+            for (int i = 1; i < incomingArray.Length; i++)
+            {
+                Compare compare = (incomingArray[0] > incomingArray[^1]) switch
+                {
+                    true => MoreOreEqual(i-1, i),
+                    false => LessOrEqual(i-1, i),
+                    _=> throw new Exception()
+                };
+
+                if (!compare(i-1, i + 1))
+                {
+                    return false;
+                }
+            }
+
             return true;
         }
 
