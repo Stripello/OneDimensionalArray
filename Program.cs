@@ -5,5 +5,6 @@ using BenchmarkDotNet.Running;
 using BenchmarkDotNet.Attributes;
 
 
-BenchmarkRunner.Run<SortingExperiments>();
+var arry =new  int[] {0,1,0,0};
 
+Console.WriteLine(OneDimensionalArrays.IsArrayArranged2(arry));

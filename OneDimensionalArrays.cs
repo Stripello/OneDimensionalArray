@@ -89,24 +89,19 @@ namespace ArraysOperations
         internal static bool IsArrayArranged2(int[] incomingArray)
         {
             bool MoreOreEqual(int a, int b) => a >= b;
-            bool LessOrEqual(int a, int b) => a <= b;
-
-          
+            bool LessOrEqual(int a, int b) => a <= b; 
+            Compare compare = (incomingArray[0] > incomingArray[^1]) switch
+            {
+                true => MoreOreEqual,
+                false => LessOrEqual
+            };
             for (int i = 1; i < incomingArray.Length; i++)
             {
-                Compare compare = (incomingArray[0] > incomingArray[^1]) switch
-                {
-                    true => MoreOreEqual(i-1, i),
-                    false => LessOrEqual(i-1, i),
-                    _=> throw new Exception()
-                };
-
-                if (!compare(i-1, i + 1))
+                if (!compare(incomingArray[i-1], incomingArray[i]))
                 {
                     return false;
                 }
             }
-
             return true;
         }
 
